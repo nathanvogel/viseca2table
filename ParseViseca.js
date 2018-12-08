@@ -1,10 +1,11 @@
 var tN = document.getElementsByClassName("name");
-var tD = document.getElementsByClassName("transaction-date");
+var tD = document.getElementsByClassName("date-item--full");
 var tA = document.querySelectorAll(
   '[data-ng-bind="transaction.amount | number: 2"]'
 );
 
 var columns = [tD, tA, tN];
+console.log(columns);
 
 function createTable() {
   var myTableDiv = document.getElementById("main");
