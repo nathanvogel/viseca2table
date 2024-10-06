@@ -4,8 +4,20 @@ var tA = document.querySelectorAll(
   '[data-ng-bind="transaction.amount | number: 2"]'
 );
 
+function getDate(elem) {
+  return elem.textContent;
+}
+
+function getAmount(elem) {
+  return elem.textContent;
+}
+
+function getName(elem) {
+  return elem.firstElementChild.textContent;
+}
+
 var columns = [tD, tA, tN];
-console.log(columns);
+var getters = [getDate, getAmount, getName];
 
 function createTable() {
   var myTableDiv = document.getElementById("main");
@@ -19,6 +31,7 @@ function createTable() {
   return tableBody;
 }
 
+
 function addTable() {
   var table = document.getElementById("visecasummarytable");
   var tableBody;
@@ -29,13 +42,15 @@ function addTable() {
   }
 
   for (var i = 0; i < tN.length; i++) {
+    if (getName(columns[2][i]) == "Votre paiement - Merci") continue;
     var tr = document.createElement("TR");
     tableBody.appendChild(tr);
 
     for (var j = 0; j < columns.length; j++) {
       var td = document.createElement("TD");
       td.width = "75";
-      td.appendChild(document.createTextNode(columns[j][i].textContent));
+      var text =  getters[j](columns[j][i]);
+      td.appendChild(document.createTextNode(text));
       tr.appendChild(td);
     }
   }
